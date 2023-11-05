@@ -1,61 +1,64 @@
-#Create a Python program which can find square and cube numbers in a given range 
-from math import sqrt
-from numpy import cbrt
-from colorama import Fore 
-import sys 
-import time
-while True:
- try:
-   def start_limit():
-    global start 
-    global limit 
-    start=int(input('start:'))
-    limit=int(input('limit:'))
-    
-   cube='cube'
-   square_numbers='square'
-   type_of_numbers=[square_numbers,cube]
-   for num in type_of_numbers:
-    if num==type_of_numbers[0]:
-        print(f'{num[0:3]}:{num}')
-    elif num==type_of_numbers[1]:
-        print(f'{num}:{num}')
-   else:
-    square_or_cube=input('type_of_number:')
-    if square_or_cube==square_numbers[0:3]:
-        start_limit()
-        time.sleep(0.2)
-        print(f'square numbers between {start} and {limit}:')
-        time.sleep(0.2)
-        for n in range(start,limit):
-            square_root=sqrt(n)
-            if square_root%1==0:
-                print(n)
-            else:
-                pass
-    elif square_or_cube==cube:
-        start_limit()
-        time.sleep(0.2)
-        numbers=[]
-        for x in range(start,limit):
-            numbers.append(x)
-        else:
-            print(f'cube numbers between {start} and {limit}:\n')
-            time.sleep(0.2)
-            for num in numbers:
-                if cbrt(num)%1==0:
-                    print(num)
-                else:
-                  pass 
- except ValueError:
-     
-    def error_msg(txt):
-     for n in txt:
-      sys.stdout.flush()
-      time.sleep(0.2)
-      sys.stdout.write(f'{Fore.RED}{n}\n')
-     else:
-      reset_to_default_color=Fore.RESET 
-      print(f'{reset_to_default_color}')
+run_condition=True
+while run_condition:
+  try:
+    from colorama import Fore 
+    import sys 
+    import time 
+    import random
+    def color_random():
+      color_txt=Fore.RED,Fore.CYAN,Fore.GREEN 
+      print(random.choice(color_txt))
 
-    error_msg(txt='Not a numeric value inputted')
+    color_random()
+    msg=['Length','of','password',':']
+    user=int(input('_'.join(msg)))
+    if user<=4:
+      error_msg='error that password is weak'
+      print(Fore.RED)
+      for txt in error_msg.upper():
+        sys.stdout.flush()
+        time.sleep(0.2)
+        sys.stdout.write(txt)
+        sys.stdout.write('\n')
+    elif user>26:
+      print('Error:Your password exceeds 26 letters')
+    elif user>=5:
+      time.sleep(0.2)
+      print('Ok... password strong')
+      time.sleep(0.2)
+      special_chars=str(input('Do you want special characters in your new password y/n:'))
+      yes='y'
+      no='n'
+      if special_chars==yes:
+        letters='abcdefghijklmnopqrstuwxyz'
+        UPPER_CASE='ABCDEFGHIJKLMNOPQRSTUWXYZ'
+        special_chars=['#','@']
+        numerical_values=['1','2','3','4','5','6','7']
+        sampled=random.sample(letters,user-len(random.sample(special_chars,2)))
+        sampled_2=random.sample(UPPER_CASE,user-len(random.sample(special_chars,2)))
+        ultimate_sampled=sampled,sampled_2
+        print('Your new password:',''.join(random.choice(ultimate_sampled))+''.join(random.choice(special_chars)+''.join(random.choice(special_chars))))
+        time.sleep(0.2)
+        save_1=input('Do you want you save your newly acquired password?\ny/n:')
+        if save_1==yes:
+          with open('save.txt','a')as a:      a.write(str(''.join(random.choice(ultimate_sampled))+''.join(random.choice(special_chars)+''.join(random.choice(special_chars)))))
+          time.sleep(0.2)
+          a.write('\n')
+        elif save_1==no:
+          print('Hello World')
+      elif special_chars==no:
+        letters2=random.sample('abcdefghijklmnopq_rstuwxyz0123456789ABCDEFGHIJKLMNO_PQRSTUWXYZ',user)
+        print('Your new password,',''.join(letters2))
+        save=input('Do you want to save your newly aquired password?\ny/n:')
+        if save==yes:
+          with open('save.txt','a')as ab:
+            ab.write(''.join(letters2))
+            time.sleep(0.2)
+            ab.write('\n')
+
+        elif save==no:
+          print('HU')
+  except ValueError:
+    pass
+  except NameError:
+    pass
