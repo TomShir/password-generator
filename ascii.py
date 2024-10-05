@@ -20,7 +20,6 @@ while run_condition:
         time.sleep(0.2)
         sys.stdout.write(txt)
         sys.stdout.write('\n')
-    elif user>26:
       print('Error:Your password exceeds 26 letters')
     elif user>=5:
       time.sleep(0.2)
@@ -45,7 +44,7 @@ while run_condition:
           time.sleep(0.2)
           a.write('\n')
         elif save_1==no:
-          print('Hello World')
+          pass
       elif special_chars==no:
         letters2=random.sample('abcdefghijklmnopq_rstuwxyz0123456789ABCDEFGHIJKLMNO_PQRSTUWXYZ',user)
         print('Your new password,',''.join(letters2))
@@ -57,7 +56,7 @@ while run_condition:
             ab.write('\n')
 
         elif save==no:
-          print('HU')
+          pass
   except ValueError:
     pass
   except NameError:
