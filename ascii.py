@@ -1,12 +1,11 @@
 run_condition=True
-while run_condition:
-  try:
-    from colorama import Fore 
-    import sys 
-    import time 
+try:
+    from colorama import Fore
+    import sys
+    import time
     import random
     def color_random():
-      color_txt=Fore.RED,Fore.CYAN,Fore.GREEN 
+      color_txt=Fore.RED,Fore.CYAN,Fore.GREEN
       print(random.choice(color_txt))
 
     color_random()
@@ -20,7 +19,6 @@ while run_condition:
         time.sleep(0.2)
         sys.stdout.write(txt)
         sys.stdout.write('\n')
-      print('Error:Your password exceeds 26 letters')
     elif user>=5:
       time.sleep(0.2)
       print('Ok... password strong')
@@ -31,22 +29,25 @@ while run_condition:
       if special_chars==yes:
         letters='abcdefghijklmnopqrstuwxyz'
         UPPER_CASE='ABCDEFGHIJKLMNOPQRSTUWXYZ'
-        special_chars=['#','@']
-        numerical_values=['1','2','3','4','5','6','7']
-        sampled=random.sample(letters,user-len(random.sample(special_chars,2)))
-        sampled_2=random.sample(UPPER_CASE,user-len(random.sample(special_chars,2)))
-        ultimate_sampled=sampled,sampled_2
-        print('Your new password:',''.join(random.choice(ultimate_sampled))+''.join(random.choice(special_chars)+''.join(random.choice(special_chars))))
+        special_chars=[ '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=',
+    '{', '[', '}', ']', '|', '\\', ':', ';', '"', "'", '<', ',', '>', '.', '?', '/',
+    '`', '~',]
+        numerical_values=['1','2','3','4','5','6','7','8','9','0']
+        numerical_values.extend(letters)
+        numerical_values.extend(UPPER_CASE)
+        numerical_values.extend(special_chars)
+        password=random.sample(numerical_values,user)
+        print('Your new password:',"".join(password))
         time.sleep(0.2)
         save_1=input('Do you want you save your newly acquired password?\ny/n:')
         if save_1==yes:
-          with open('save.txt','a')as a:      a.write(str(''.join(random.choice(ultimate_sampled))+''.join(random.choice(special_chars)+''.join(random.choice(special_chars)))))
+          with open('save.txt','a')as a:      a.write(password)
           time.sleep(0.2)
           a.write('\n')
         elif save_1==no:
           pass
       elif special_chars==no:
-        letters2=random.sample('abcdefghijklmnopq_rstuwxyz0123456789ABCDEFGHIJKLMNO_PQRSTUWXYZ',user)
+        letters2=random.sample('abcdefghijklmnopq_rstuwxyz0123456789ABCDEFGHIJKLMNO_PQRSTUWXYZ'+"".join(special_chars),user)
         print('Your new password,',''.join(letters2))
         save=input('Do you want to save your newly aquired password?\ny/n:')
         if save==yes:
@@ -57,7 +58,5 @@ while run_condition:
 
         elif save==no:
           pass
-  except ValueError:
-    pass
-  except NameError:
-    pass
+except ValueError:
+      pass
